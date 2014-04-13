@@ -14,14 +14,29 @@ $(document).ready(function(){
             Mapcontroller.setMarkers(satelliteslist);
         });
 
-    }, 10000);
+    }, 5000);
 
-    $("input#search-box").keypress(function(key) {
+    $("input#search-box").keyup(function(key) {
+        Mapcontroller.searchMarker($(this).val(),function(lat,lng,keys){
+            if(lat == null){
+                $("input#search-box").autocomplete({
+                    source: keys
+                });
+            }else{
+                console.log(key);
+                Mapcontroller.setMapPosition(lat,lng);
+            }
+
+        });
+    });
+
+/*    $("input#search-box").keypress(function(key) {
         if(key.which == 13){
-            Mapcontroller.searchMarker($(this).val(),function(lat,lng){
+            Mapcontroller.searchMarker($(this).val(),function(lat,lng,key){
+                console.log(key);
                 Mapcontroller.setMapPosition(lat,lng);
             });
         }
-    });
+    });*/
 
 });
