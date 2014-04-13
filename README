@@ -3,3 +3,5 @@ http://spacebottle.cloudapp.net/api/satellites/satellite_id(xxxxxx)
 
 mBaaSでサテライト毎のメッセージを取得する(idなければ全件)
 https://spacebottle.azure-mobile.net/api/messages?satellite_id=xxxxxx
+
+https://spacebottle.azure-mobile.net/api/details

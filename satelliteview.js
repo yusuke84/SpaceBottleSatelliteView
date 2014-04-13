@@ -4,14 +4,23 @@
 
 $(document).ready(function(){
 
+    var is_allDisplay = false;
+
     Mapcontroller = new Mapcontroller.manager();
     SatelliteManager = new SatelliteManager.manager();
 
-    Mapcontroller.init('#map-container');
+    Mapcontroller.init('#map-container',function(){
+        //表示切り替え
+        if(is_allDisplay){
+            is_allDisplay = false;
+        }else{
+            is_allDisplay = true;
+        }
+    });
 
     setInterval(function(){
         SatelliteManager.getSatellite(function(satelliteslist){
-            Mapcontroller.setMarkers(satelliteslist);
+            Mapcontroller.setMarkers(satelliteslist,is_allDisplay);
         });
 
     }, 5000);
@@ -23,20 +32,10 @@ $(document).ready(function(){
                     source: keys
                 });
             }else{
-                console.log(key);
                 Mapcontroller.setMapPosition(lat,lng);
             }
 
         });
     });
-
-/*    $("input#search-box").keypress(function(key) {
-        if(key.which == 13){
-            Mapcontroller.searchMarker($(this).val(),function(lat,lng,key){
-                console.log(key);
-                Mapcontroller.setMapPosition(lat,lng);
-            });
-        }
-    });*/
 
 });
